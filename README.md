@@ -1,9 +1,12 @@
 # ExpressionCalculator
 
-expression calculator evalute expression by 3 moduls :
- * 1 modul - check grammar is correct
- * 2 modul - get reverse polish notation by shunting-yard algorithm
- * 3 modul - calculate by stack machine algorithm
+
+Works with Java SE 7 Update 6 and above as programm uses JavaFX
+
+expression calculator evaluate expression by 3 modules :
+ * 1 module - check grammar is correct
+ * 2 module - get reverse polish notation by shunting-yard algorithm
+ * 3 module - calculate by stack machine algorithm
  
 supports
  * **ternary operator (15>16?3:14)** 
