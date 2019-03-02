@@ -24,8 +24,12 @@ public class Controller extends View{
     private void ok(){
 
         String expression = tf1.getText();
+        try{
+            displayLabel(model.calculate(expression));
+        }catch (IncorrectExpressionException e){
+            displayLabel(e.getMessage());
+        }
 
-        displayLabel(model.calculate(expression));
 
 
     }

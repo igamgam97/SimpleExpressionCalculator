@@ -21,7 +21,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        Scene scene = new Scene(root, 400, 200);
+        Scene scene = new Scene(root, 800, 200);
 
         primaryStage.setTitle("Calculator");
         primaryStage.setScene(scene);
