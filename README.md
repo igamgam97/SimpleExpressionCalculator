@@ -16,6 +16,8 @@ supports
  
  Example UI :
  
- ![Image alt](https://pp.userapi.com/c845016/v845016899/1bfe77/cw7WmO1JqYU.jpg)
+ ![Image alt](https://pp.userapi.com/c851320/v851320347/cfe1a/T7aqnzV89BU.jpg)
  
- ![Image alt](https://pp.userapi.com/c851216/v851216578/cd1a9/cNb87snSr8E.jpg)
+ ![Image alt](https://pp.userapi.com/c851320/v851320347/cfe11/-ION_ivYS8A.jpg)
+
+  ![Image alt](https://pp.userapi.com/c848536/v848536621/13d9ec/P76FoC7pVMs.jpg)
