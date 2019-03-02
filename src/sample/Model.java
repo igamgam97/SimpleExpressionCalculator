@@ -36,51 +36,54 @@ class Model {
             if (isNumber(token)) {
                 stackCalc.push(token);
             } else if (isOperator(token)) {
-                double operand1 = Double.parseDouble(stackCalc.pop());
-                double operand2 = Double.parseDouble(stackCalc.pop());
-                switch (token) {
-                    case "+":
-                        stackCalc.push(String.valueOf(operand2 + operand1));
-                        break;
-                    case "-":
-                        stackCalc.push(String.valueOf(operand2 - operand1));
-                        break;
-                    case "u-":
-                        stackCalc.push(String.valueOf(operand2 - operand1));
-                        break;
-                    case "*":
-                        stackCalc.push(String.valueOf(operand2 * operand1));
-                        break;
-                    case "/":
-                        stackCalc.push(String.valueOf(operand2 / operand1));
-                        break;
-                    case ">":
-                        if (operand2 > operand1) getPartOfTernaryExpression(true);
-                        else getPartOfTernaryExpression(false);
-                        break;
-                    case "<":
-                        if (operand2 < operand1) getPartOfTernaryExpression(true);
-                        else getPartOfTernaryExpression(false);
-                        break;
-                    case "==":
-                        if (operand2 == operand1) getPartOfTernaryExpression(true);
-                        else getPartOfTernaryExpression(false);
-                        break;
-                    case "!=":
-                        if (operand2 != operand1) getPartOfTernaryExpression(true);
-                        else getPartOfTernaryExpression(false);
-                        break;
-                    case ">=":
-                        if (operand2 >= operand1) getPartOfTernaryExpression(true);
-                        else getPartOfTernaryExpression(false);
-                        break;
-                    case "<=":
-                        if (operand2 <= operand1) getPartOfTernaryExpression(true);
-                        else getPartOfTernaryExpression(false);
-                        break;
-                }
-            } else throw new IncorrectExpressionException("Incorrect expression : check operation");
+                if (stackCalc.size() > 1) {
+                    double operand1 = Double.parseDouble(stackCalc.pop());
+                    double operand2 = Double.parseDouble(stackCalc.pop());
+                    switch (token) {
+                        case "+":
+                            stackCalc.push(String.valueOf(operand2 + operand1));
+                            break;
+                        case "-":
+                            stackCalc.push(String.valueOf(operand2 - operand1));
+                            break;
+                        case "u-":
+                            stackCalc.push(String.valueOf(operand2 - operand1));
+                            break;
+                        case "*":
+                            stackCalc.push(String.valueOf(operand2 * operand1));
+                            break;
+                        case "/":
+                            stackCalc.push(String.valueOf(operand2 / operand1));
+                            break;
+                        case ">":
+                            if (operand2 > operand1) getPartOfTernaryExpression(true);
+                            else getPartOfTernaryExpression(false);
+                            break;
+                        case "<":
+                            if (operand2 < operand1) getPartOfTernaryExpression(true);
+                            else getPartOfTernaryExpression(false);
+                            break;
+                        case "==":
+                            if (operand2 == operand1) getPartOfTernaryExpression(true);
+                            else getPartOfTernaryExpression(false);
+                            break;
+                        case "!=":
+                            if (operand2 != operand1) getPartOfTernaryExpression(true);
+                            else getPartOfTernaryExpression(false);
+                            break;
+                        case ">=":
+                            if (operand2 >= operand1) getPartOfTernaryExpression(true);
+                            else getPartOfTernaryExpression(false);
+                            break;
+                        case "<=":
+                            if (operand2 <= operand1) getPartOfTernaryExpression(true);
+                            else getPartOfTernaryExpression(false);
+                            break;
+                    }
+                } else throw new IncorrectExpressionException("Incorrect expression : check ternary operation");
+            }
         }
+        if (stackCalc.isEmpty()) throw  new IncorrectExpressionException("Incorrect expression");
         return stackCalc.pop();
     }
 
