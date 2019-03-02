@@ -127,7 +127,7 @@ class Model {
     // check input Grammar is correct
     private void isRightGrammar(ArrayList<String> tokens) throws IncorrectExpressionException {
         int numberBrackets = 0;
-        if (isCloseBracket(tokens.get(0)) ) throw new IncorrectExpressionException("Incorrect expression: ) in begin");
+        if (isCloseBracket(tokens.get(0))) throw new IncorrectExpressionException("Incorrect expression: ) in begin");
         else if (isOperator(tokens.get(0)))
             throw new IncorrectExpressionException("Incorrect expression: invalid operation in begin");
         for (int i = 0; i < tokens.size() - 1; i++) {
@@ -140,7 +140,7 @@ class Model {
                     throw new IncorrectExpressionException("Incorrect expression : " + token + nextToken);
                 else if (isOpenBracket(token)) {
                     numberBrackets++;
-                    if (isOperator(nextToken) || isCloseBracket(nextToken) || isOpenBracket(nextToken))
+                    if (isOperator(nextToken) || isCloseBracket(nextToken))
                         throw new IncorrectExpressionException("Incorrect expression : " + token + nextToken);
                 } else if (isCloseBracket(token)) {
                     numberBrackets--;

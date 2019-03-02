@@ -4,36 +4,40 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 
+public class Controller extends View {
 
-public class Controller extends View{
-
-    @FXML private TextField tf1;
+    @FXML
+    private TextField tf1;
 
     private Model model = new Model();
 
-    @FXML public void onActionBtnOk() { this.ok();}
+    @FXML
+    public void onActionBtnOk() {
+        this.ok();
+    }
 
-    @FXML public void onActionBtnClear() { this.clear();}
+    @FXML
+    public void onActionBtnClear() {
+        this.clear();
+    }
 
 
-    private void clear(){
+    private void clear() {
         tf1.clear();
         displayLabel("");
     }
 
-    private void ok(){
+    private void ok() {
 
         String expression = tf1.getText();
-        try{
+        try {
             displayLabel(model.calculate(expression));
-        }catch (IncorrectExpressionException e){
+        } catch (IncorrectExpressionException e) {
             displayLabel(e.getMessage());
         }
 
 
-
     }
-
 
 
 }

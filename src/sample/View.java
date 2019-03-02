@@ -1,8 +1,8 @@
 package sample;
 
 /*
-* это представление: то, что выводится на форму
-* */
+ * это представление: то, что выводится на форму
+ * */
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,7 +14,7 @@ class View {
     private Label LabelResult;
 
     // выводит текст в LabelResult
-    void displayLabel(String s){
+    void displayLabel(String s) {
         LabelResult.setText(s);
     }
 }
