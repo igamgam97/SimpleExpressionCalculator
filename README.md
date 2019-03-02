@@ -6,10 +6,13 @@ expression calculator evalute expression by 3 moduls :
  * 3 modul - calculate by stack machine algorithm
  
 supports
- * operation : +/*-
+ * **ternary operator (15>16?3:14)** 
+ * operation :  +/*-
  * operation : unary minus
  * arbitrary nesting of brackets : ()
  * real numbers
+ 
+**ternary oparator supports:  < > >= <= != ==**
  
  Example UI :
  
