@@ -1,7 +1,7 @@
 package sample;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /* this class calculate math expression by 3 modules:
@@ -24,23 +24,12 @@ class Model {
 
     //calculate by stack machine algorithm
     String calculate(String expression) {
-        // make some preparations
-        expression = expression.replace(" ", "").replace("(-", "(0-");
-        if (expression.length() != 0 && expression.charAt(0) == '-') {
-            expression = "0" + expression;
-        }
-
-        String[] tokens = expression.split(("((?<=[*/+()><?:=!-])|(?=[*/+()><?:=!-]))"));
-        System.out.println(Arrays.toString(tokens));
-        System.out.println(Arrays.toString(findTwoCharacterOperator(tokens)));
-        tokens = findTwoCharacterOperator(tokens);
-        //check expression is correct
-        if (isRightGrammar(tokens)) {
-
+            // make some preparations
+            ArrayList<String> tokens = parse(expression);
             convertToRPN(tokens);
             // reverse stack
             Collections.reverse(stackRPN);
-            System.out.println(Arrays.toString(stackRPN.toArray()));
+            //System.out.println(Arrays.toString(stackRPN.toArray()));
             stackCalc.clear();
             while (!stackRPN.empty()) {
                 String token = stackRPN.pop();
@@ -54,6 +43,9 @@ class Model {
                             stackCalc.push(String.valueOf(operand2 + operand1));
                             break;
                         case "-":
+                            stackCalc.push(String.valueOf(operand2 - operand1));
+                            break;
+                        case "u-":
                             stackCalc.push(String.valueOf(operand2 - operand1));
                             break;
                         case "*":
@@ -90,11 +82,10 @@ class Model {
                 }
             }
             return stackCalc.pop();
-        } else return "Unexpected item!";
     }
 
     // get reverse polish notation by shunting-yard algorithm
-    private void convertToRPN(String[] tokens) {
+    private void convertToRPN(ArrayList<String> tokens) {
         // cleaning stacks
         stackOperations.clear();
         stackRPN.clear();
@@ -183,7 +174,7 @@ class Model {
     }
 
     private boolean isOperator(String token) {
-        return OPERATORS.contains(token) || isComparisonOperator(token);
+        return OPERATORS.contains(token) || isComparisonOperator(token) || token.equals("u-");
     }
 
     private boolean isComparisonOperator(String token) {
@@ -194,7 +185,7 @@ class Model {
     private byte getPrecedence(String token) {
         if (token.equals("+") || token.equals("-")) {
             return 1;
-        } else if (token.equals("/") || token.equals("*"))
+        } else if (token.equals("/") || token.equals("*") || token.equals("u-"))
             return 3;
         else if (isComparisonOperator(token)) return 2;
         else return 2;
@@ -255,7 +246,7 @@ class Model {
         System.out.println(Arrays.toString(stackRPN.toArray()));
     }
 
-    private String[] findTwoCharacterOperator(String[] tokens) {
+    private ArrayList<String> findTwoCharacterOperator(String[] tokens) {
         ArrayList<String> newTokens = new ArrayList<>();
         for (int i = 0; i < tokens.length - 1; i++) {
             String token = tokens[i];
@@ -264,7 +255,7 @@ class Model {
                 if (nextToken.equals("=")) {
                     newTokens.add("==");
                     i++;
-                } else throw new ParseException("="+nextToken,0);
+                }
             } else if (token.equals(">") && nextToken.equals("=")) {
                 newTokens.add(">=");
                 i++;
@@ -277,6 +268,41 @@ class Model {
             } else newTokens.add(token);
         }
         newTokens.add(tokens[tokens.length - 1]);
-        return newTokens.toArray(new String[0]);
+
+
+        return newTokens;
+    }
+
+    private ArrayList<String> findUnaryMinus(ArrayList<String> tokens){
+        ArrayList<String> newTokens = new ArrayList<>();
+        for (int i = 0; i < tokens.size() - 1; i++) {
+            String token = tokens.get(i);
+            String nextToken = tokens.get(i+1);
+            if ((isComparisonOperator(token) || token.equals("(")) && nextToken.equals("-")){
+                newTokens.add(token);
+                newTokens.add("0");
+                newTokens.add("u-");
+                i++;
+            } else newTokens.add(token);
+        }
+        newTokens.add(tokens.get(tokens.size()-1));
+        System.out.println(Arrays.toString(tokens.toArray()));
+        if (newTokens.get(0).equals("-")) {
+            newTokens.remove(0);
+            newTokens.add(0,"u-");
+            newTokens.add(0,"0");
+        }
+
+        return newTokens;
+    }
+
+    private ArrayList<String> parse (String expression){
+
+        expression = expression.replace(" ", "");
+        String[] tokens = expression.split(("((?<=[*/+()><?:=!-])|(?=[*/+()><?:=!-]))"));
+        System.out.println(Arrays.toString(tokens));
+        System.out.println(Arrays.toString(findTwoCharacterOperator(tokens).toArray()));
+        System.out.println(Arrays.toString(findUnaryMinus(findTwoCharacterOperator(tokens)).toArray()));
+        return findUnaryMinus(findTwoCharacterOperator(tokens));
     }
 }
