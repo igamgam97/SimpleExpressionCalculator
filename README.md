@@ -14,3 +14,5 @@ supports
  Example UI :
  
  ![Image alt](https://pp.userapi.com/c845016/v845016899/1bfe77/cw7WmO1JqYU.jpg)
+ 
+ ![Image alt](https://pp.userapi.com/c851216/v851216578/cd1a9/cNb87snSr8E.jpg)
